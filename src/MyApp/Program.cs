@@ -21,8 +21,17 @@ namespace MyApp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseUrls("http://*:1000", "https://*:1234", "http://0.0.0.0:5000")
-                    .UseStartup<Startup>();
+                        .UseStartup<Startup>();
+
+                    if (OperatingSystem.IsLinux())
+                    {
+                        //Disable HTTPs for tests
+                        webBuilder.UseUrls("http://*:1000", "http://0.0.0.0:5000");
+                    }
+                    else
+                    {
+                        webBuilder.UseUrls("http://*:1000", "https://*:1234", "http://0.0.0.0:5000");
+                    }
                 });
     }
 }

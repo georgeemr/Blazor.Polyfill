@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Components.Server;
 using React;
 using React.AspNet;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
-using JavaScriptEngineSwitcher.V8;
+using JavaScriptEngineSwitcher.ChakraCore;
 using React.Exceptions;
 using System.Text.RegularExpressions;
 using NUglify;
@@ -29,8 +29,8 @@ namespace Blazor.Polyfill.Server
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddReact();
 
-            services.AddJsEngineSwitcher(options => options.DefaultEngineName = V8JsEngine.EngineName)
-                .AddV8();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
+                .AddChakraCore();
 
             return services;
         }
